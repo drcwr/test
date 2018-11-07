@@ -25,6 +25,23 @@ bash install.sh
 
 
 https://blog.csdn.net/u011534057/article/details/54582951
+
 sudo add-apt-repository ppa:eugenesan/ppa
+
 sudo apt-get update
+
 sudo apt-get install smartgithg
+
+
+
+
+HyperLedger Fabric ChainCode开发——shim.ChaincodeStubInterface用法
+
+http://www.cnblogs.com/studyzy/p/7360733.html
+
+
+
+
+
+
+
