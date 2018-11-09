@@ -47,6 +47,12 @@ Date:   Tue Nov 6 18:47:25 2018 +0800
 
     temp work
 
+current := time.Now()
 
+    fmt.Println("origin : ", current.String())
+    // origin :  2016-09-02 15:53:07.159994437 +0800 CST
+
+    fmt.Println("mm-dd-yyyy : ", current.Format("01-02-2006"))
+    // mm-dd-yyyy :  09-02-2016
 
 
