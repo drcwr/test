@@ -56,3 +56,5 @@ current := time.Now()
     // mm-dd-yyyy :  09-02-2016
 
 
+Hyperledger Fabric 1.0 链码（chaincode）的原理、接口和结构
+https://blog.csdn.net/so5418418/article/details/78668109
