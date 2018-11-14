@@ -118,7 +118,8 @@ lease {
 
 
 
-
+/etc/resolvconf/resolv.conf.d/base
+nameserver xxx.xxx.xxx.xxx
 
 
 
