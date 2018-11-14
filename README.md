@@ -10,7 +10,7 @@ dash vs bash
 
 修改sh默认连接到bash的方法：
 
-第一种
+# 第一种
 sudo dpkg-reconfigure dash
 
 选择no 即可！
@@ -19,7 +19,7 @@ sudo dpkg-reconfigure dash
 
 
 
-第二种
+# 第二种
 通过bash命令执行
 bash install.sh
 
