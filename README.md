@@ -85,46 +85,45 @@ nameserver 192.168.1.1
 
 ### dhcp 
 
-cat /var/lib/dhcp/dhclient.leases 
-lease {
-  interface "enp0s3";
-  fixed-address 192.168.1.18;
-  option subnet-mask 255.255.255.0;
-  option dhcp-lease-time 86400;
-  option routers 192.168.1.1;
-  option dhcp-message-type 5;
-  option dhcp-server-identifier 192.168.1.1;
-  option domain-name-servers 192.168.1.1;
-  renew 2 2018/11/13 21:38:06;
-  rebind 3 2018/11/14 08:33:45;
-  expire 3 2018/11/14 11:33:45;
-}
-lease {
-  interface "enp0s3";
-  fixed-address 192.168.1.18;
-  option subnet-mask 255.255.255.0;
-  option routers 192.168.1.1;
-  option dhcp-lease-time 86400;
-  option dhcp-message-type 5;
-  option domain-name-servers 192.168.1.1;
-  option dhcp-server-identifier 192.168.1.1;
-  renew 2 2018/11/13 23:17:51;
-  rebind 3 2018/11/14 08:33:47;
-  expire 3 2018/11/14 11:33:47;
-}
-
+cat /var/lib/dhcp/dhclient.leases  
+ lease {  
+ interface "enp0s3";  
+ fixed-address 192.168.1.18;  
+ option subnet-mask 255.255.255.0;  
+ option dhcp-lease-time 86400;  
+ option routers 192.168.1.1;  
+ option dhcp-message-type 5;  
+ option dhcp-server-identifier 192.168.1.1;  
+ option domain-name-servers 192.168.1.1;  
+ renew 2 2018/11/13 21:38:06;  
+ rebind 3 2018/11/14 08:33:45;  
+ expire 3 2018/11/14 11:33:45;  
+ }  
+ lease {   
+ interface "enp0s3";  
+ fixed-address 192.168.1.18;  
+ option subnet-mask 255.255.255.0;  
+ option routers 192.168.1.1;  
+ option dhcp-lease-time 86400;  
+ option dhcp-message-type 5;  
+ option domain-name-servers 192.168.1.1;  
+ option dhcp-server-identifier 192.168.1.1;  
+ renew 2 2018/11/13 23:17:51;  
+ rebind 3 2018/11/14 08:33:47;    
+ expire 3 2018/11/14 11:33:47;    
+ }
 
 ### dns
 /etc/resolvconf/resolv.conf.d/base
 nameserver xxx.xxx.xxx.xxx
 
 ## go network transfer
-recv
-url.QueryUnescape
-json.Unmarshal
-modify
-json.Marshal
-url.QueryEscape
-send
+recv  
+url.QueryUnescape  
+json.Unmarshal  
+modify  
+json.Marshal  
+url.QueryEscape  
+send  
 
 
