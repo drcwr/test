@@ -1,11 +1,11 @@
 # test
 * test
-
+***
 ### CentOS-7-x86_64-DVD-1804.iso
 http://101.96.10.63/isoredirect.centos.org/centos/7/isos/x86_64/CentOS-7-x86_64-DVD-1804.iso
 http://mirrors.aliyun.com/centos/7.5.1804/isos/x86_64/CentOS-7-x86_64-DVD-1804.iso
 
-
+***
 ### dash vs bash
 后来发现，因为Ubuntu默认的sh是连接到dash的,又因为dash跟bash的不兼容所以出错了.执行时可以把sh换成bash文件名.sh来执行.成功.dash是什么东西,查了一下,应该也是一种shell,貌似用户对它的诟病颇多。
 
@@ -32,14 +32,14 @@ https://blog.csdn.net/u011534057/article/details/54582951
     sudo apt-get install smartgithg
 
 
-
+***
 
 ### HyperLedger Fabric ChainCode开发——shim.ChaincodeStubInterface用法
 
 
 http://www.cnblogs.com/studyzy/p/7360733.html
 
-
+***
 
 ### go time string
 
@@ -55,7 +55,7 @@ http://www.cnblogs.com/studyzy/p/7360733.html
 ### Hyperledger Fabric 1.0 链码（chaincode）的原理、接口和结构
 https://blog.csdn.net/so5418418/article/details/78668109
 
-
+***
 
 ### ubuntu ip config
 
@@ -114,7 +114,7 @@ https://blog.csdn.net/so5418418/article/details/78668109
 * dns
     /etc/resolvconf/resolv.conf.d/base
     nameserver xxx.xxx.xxx.xxx
-
+***
 ### go network transfer
     recv  
     url.QueryUnescape  
