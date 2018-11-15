@@ -25,8 +25,8 @@ sudo dpkg-reconfigure dash
     bash install.sh
 
 
-~~smartgithg
-https://blog.csdn.net/u011534057/article/details/54582951~~
+### ~~smartgithg~~
+~~https://blog.csdn.net/u011534057/article/details/54582951~~
 
  ~~sudo add-apt-repository ppa:eugenesan/ppa  
     sudo apt-get update  
