@@ -11,20 +11,18 @@ http://mirrors.aliyun.com/centos/7.5.1804/isos/x86_64/CentOS-7-x86_64-DVD-1804.i
 
 修改sh默认连接到bash的方法：
 
-* 第一种
-sudo dpkg-reconfigure dash
-
-选择no 即可！
-
-再次编译！通过！搞定！
+* 第一种  
+    sudo dpkg-reconfigure dash  
+    选择no 即可！  
+    再次编译！通过！搞定！  
 
 
 
-* 第二种
-    通过bash命令执行
-    bash install.sh
+* 第二种  
+    通过bash命令执行  
+    bash install.sh  
 
-
+***
 ### ~~smartgithg~~
 ~~https://blog.csdn.net/u011534057/article/details/54582951~~
 
