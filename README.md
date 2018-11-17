@@ -23,14 +23,15 @@ http://mirrors.aliyun.com/centos/7.5.1804/isos/x86_64/CentOS-7-x86_64-DVD-1804.i
     bash install.sh  
 
 ***
-### smartgithg
+### smartgit
+### ~~smartgithg~~
 ~~https://blog.csdn.net/u011534057/article/details/54582951~~
 
  ~~sudo add-apt-repository ppa:eugenesan/ppa  
     sudo apt-get update  
-    sudo apt-get install smartgithg~~
-https://www.syntevo.com/smartgit/download/
-https://www.syntevo.com/downloads/smartgit/smartgit-linux-18_1_5.tar.gz
+    sudo apt-get install smartgithg~~  
+https://www.syntevo.com/smartgit/download/  
+https://www.syntevo.com/downloads/smartgit/smartgit-linux-18_1_5.tar.gz  
 
 ***
 
