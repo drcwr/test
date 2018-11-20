@@ -129,3 +129,10 @@ https://blog.csdn.net/so5418418/article/details/78668109
 ### fabric源码解析
 
 https://blog.csdn.net/idsuf698987/
+
+***
+### proto
+    cd $HOMEDIR/code/dir
+    #protoc --go_out=plugins=grpc:.  xxx.proto
+    
+***
