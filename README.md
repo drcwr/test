@@ -136,3 +136,6 @@ https://blog.csdn.net/idsuf698987/
     #protoc --go_out=plugins=grpc:.  xxx.proto
     
 ***
+### git tag
+    git push origin --tags
+***
