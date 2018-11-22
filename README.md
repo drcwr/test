@@ -139,3 +139,10 @@ https://blog.csdn.net/idsuf698987/
 ### git tag
     git push origin --tags
 ***
+
+### ssh key known_hosts
+    /etc/ssh/ssh_config
+    StrictHostKeyChecking no
+    
+    ***
+    
