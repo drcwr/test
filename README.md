@@ -153,7 +153,7 @@ https://blog.csdn.net/idsuf698987/
 
 ### 保持linux下保持ssh不断线
     ssh -o ServerAliveInterval=60
-    每60s向服务器(大型机)发送一次命令
+    每60s向服务器发送一次命令
 ***
 
 
