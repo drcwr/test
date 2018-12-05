@@ -156,5 +156,8 @@ https://blog.csdn.net/idsuf698987/
     每60s向服务器发送一次命令
 ***
 
+### 过滤显示，统计个数
+cat file |tee t;grep ab t|tee r;grep b r|tee s;wc s
 
+************
 
