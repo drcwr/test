@@ -159,5 +159,19 @@ https://blog.csdn.net/idsuf698987/
 ### 过滤显示，统计个数
 cat file |tee t;grep ab t|tee r;grep b r|tee s;wc s
 
-************
+***
+
+
+### cat eof
+    cat >> /etc/yum.repos.d/MariaDB.repo <<eof
+    > [mariadb]
+    > name = MariaDB
+    > baseurl = http://yum.mariadb.org/10.2/centos7-amd64
+    > gpgkey = https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
+    > gpgcheck = 1
+    > eof
+
+***
+
+
 
