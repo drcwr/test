@@ -173,5 +173,30 @@ cat file |tee t;grep ab t|tee r;grep b r|tee s;wc s
 
 ***
 
+### jq
+    https://www.cnblogs.com/timxgb/p/6644914.html
+*    自定义格式输出某一项
 
+    jq '.[0] | {message: .commit.message, name: .commit.committer.name}'  
+    结果：
+    {
+      "name": "Stephen Dolan",
+      "message": "Merge pull request #162 from stedolan/utf8-fixes\n\nUtf8 fixes. Closes #161"
+    }
 
+*    自定义格式输出多项
+
+    jq '.[] | {message: .commit.message, name: .commit.committer.name}'  
+    结果：
+    {
+      "name": "Stephen Dolan",
+      "message": "Merge pull request #162 from stedolan/utf8-fixes\n\nUtf8 fixes. Closes #161"
+    }
+    {
+      "name": "Stephen Dolan",
+      "message": "Reject all overlong UTF8 sequences."
+    }
+	
+*    以数组形式自定义输出多项
+
+    jq '[.[] | {message: .commit.message, name: .commit.committer.name}]'
