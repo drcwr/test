@@ -200,3 +200,13 @@ cat file |tee t;grep ab t|tee r;grep b r|tee s;wc s
 *    以数组形式自定义输出多项
 
     jq '[.[] | {message: .commit.message, name: .commit.committer.name}]'
+    
+***
+    
+### git rm 带空格
+
+	git ls-files --deleted -z|xargs -0 -r git rm
+	
+***
+
+
