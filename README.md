@@ -202,11 +202,14 @@ cat file |tee t;grep ab t|tee r;grep b r|tee s;wc s
     jq '[.[] | {message: .commit.message, name: .commit.committer.name}]'
     
 ***
-    
+
 ### git rm 带空格
 
 	git ls-files --deleted -z|xargs -0 -r git rm
 	
 ***
+git push --set-upstream origin chenwuruidev
+git push
 
+***
 
