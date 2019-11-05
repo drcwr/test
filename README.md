@@ -217,4 +217,26 @@ git push --set-upstream origin chenwuruidev
 git push
 
 ***
+### git 提交流程
+git add
+git commit
+git push
+
+git checkout develop
+git pull
+
+git checkout xxx
+git log --graph
+git rebase -i commit-id
+git push -f(谨慎)
+git rebase devekop
+解决冲突
+git rebase --continue
+
+git checkout develop
+git merge xxx
+git push
+
+
+***
 
