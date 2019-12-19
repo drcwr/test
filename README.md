@@ -239,7 +239,7 @@ git push
 
 
 ***
-    ubuntu 18 04 install sublime
+### ubuntu 18 04 install sublime
     mkdir sublime
     cd sublime
     wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
