@@ -247,3 +247,15 @@ git push
     sudo apt-get install sublime-text
 
 ***
+### git add multi remotes
+    git remote add drcwr https://github.com/drcwr/kubeedge.git
+    git remote -v
+    git pull drcwr
+    git branch -a
+    git checkout -b  cmaster
+    git branch -u remotes/drcwr/master cmaster
+    git branch -vv
+    git pull
+    git push drcwr cmaster:master
+    git remote remove  origin
+***
