@@ -259,3 +259,9 @@ git push
     git push drcwr cmaster:master
     git remote remove  origin
 ***
+
+### ubuntu 拼音 pinyin
+    apt-get install ibus-pinyin
+
+***
+
