@@ -1,7 +1,6 @@
 uname -r
 
-/etc/yum.repos.d/kernel.repo
-
+cat > /etc/yum.repos.d/kernel.repo <<eof
 [kernel]
 name=kernel-nokmem
 
@@ -11,7 +10,7 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
 
 gpgcheck=0
 enabled=1
-
+eof
 
 yum update-to -y kernel-3.10.0-1062.4.1.el7 \
 kernel-devel-3.10.0-1062.4.1.el7
