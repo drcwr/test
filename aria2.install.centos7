@@ -1,5 +1,9 @@
 
 mkdir -p /opt/src/aria2
+
+cd /opt/src
+git clone https://github.com/ziahamza/webui-aria2
+
 cd /opt/src/aria2
 wget https://github.com/aria2/aria2/releases/download/release-1.35.0/aria2-1.35.0.tar.gz
 
