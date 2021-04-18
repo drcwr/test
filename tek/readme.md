@@ -1,9 +1,20 @@
 tek
 
+编程语言
+c
+c++
+python
+php
+golang
+html
+js
+java
+
 嵌入式
 串口
 uboot
 pci控制
+驱动
 c
 
 
@@ -41,6 +52,7 @@ open-forcon
 以太坊
 bts
 php
+java
 
 
 后端
