@@ -1,0 +1,37 @@
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>
+上海map</title>
+<script type="text/javascript" src="http://api.map.baidu.com/api?key=46ce9d0614bf7aefe0ba562f8cf87194&v=1.0&services=true">
+</script>
+</head>
+<body οnresize="resz()" οncοntextmenu="myDis.open()" style="margin:0px;overflow:hidden;">
+<!--<input type="button" value="测距" οnclick="myDis.open()" />-->
+<div  style="width:300px;height:400px;border:1px solid gray" id="container">
+</div>
+<script type="text/javascript">
+function resz()
+{
+    document.getElementById("container").style.width=document.body.clientWidth;
+    document.getElementById("container").style.height=document.body.clientHeight;
+}
+resz();
+</script>
+</body>
+</html>
+<script type="text/javascript">
+
+var map = new BMap.Map("container");            // 创建Map实例
+var point = new BMap.Point(121.400, 31.179);    // 创建点坐标
+    
+    map.centerAndZoom(point,10);                     // 初始化地图,设置中心点坐标和地图级别。
+
+    //添加缩放控件
+    map.addControl(new BMap.NavigationControl());  
+    map.addControl(new BMap.ScaleControl());  
+    map.addControl(new BMap.OverviewMapControl());
+
+var myDis = new BMap.DistanceTool(map);
+
+</script>
