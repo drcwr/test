@@ -4,9 +4,22 @@ apis.AddToScheme 将 CRD 的结构与 Kubernetes GroupVersionKinds 的映射添�
 
 接下来，就是通过 controller.AddToManager 创建出定义的 Operator，并且添加到 Manager 中。这也就是前文提到的 add 函数做的事情。利用 controller.New 创建出 Operator，然后 Watch 对应的资源，最后返回。下面是 controller.New 的实现：
 ```
+/opt/gopath/pkg/mod/sigs.k8s.io/controller-runtime@v0.7.2/pkg/controller/controller.go
 // New returns a new Controller registered with the Manager.  The Manager will ensure that shared Caches have
 // been synced before the Controller is Started.
 func New(name string, mgr manager.Manager, options Options) (Controller, error) {
+	c, err := NewUnmanaged(name, mgr, options)
+	if err != nil {
+		return nil, err
+	}
+
+	// Add the controller as a Manager components
+	return c, mgr.Add(c)
+}
+
+// NewUnmanaged returns a new controller without adding it to the manager. The
+// caller is responsible for starting the returned controller.
+func NewUnmanaged(name string, mgr manager.Manager, options Options) (Controller, error) {
 	if options.Reconciler == nil {
 		return nil, fmt.Errorf("must specify Reconciler")
 	}
@@ -15,8 +28,16 @@ func New(name string, mgr manager.Manager, options Options) (Controller, error) 
 		return nil, fmt.Errorf("must specify Name for Controller")
 	}
 
+	if options.Log == nil {
+		options.Log = mgr.GetLogger()
+	}
+
 	if options.MaxConcurrentReconciles <= 0 {
 		options.MaxConcurrentReconciles = 1
+	}
+
+	if options.RateLimiter == nil {
+		options.RateLimiter = workqueue.DefaultControllerRateLimiter()
 	}
 
 	// Inject dependencies into Reconciler
@@ -25,20 +46,16 @@ func New(name string, mgr manager.Manager, options Options) (Controller, error) 
 	}
 
 	// Create controller with dependencies set
-	c := &controller.Controller{
-		Do:                      options.Reconciler,
-		Cache:                   mgr.GetCache(),
-		Config:                  mgr.GetConfig(),
-		Scheme:                  mgr.GetScheme(),
-		Client:                  mgr.GetClient(),
-		Recorder:                mgr.GetRecorder(name),
-		Queue:                   workqueue.NewNamedRateLimitingQueue(workqueue.DefaultControllerRateLimiter(), name),
+	return &controller.Controller{
+		Do: options.Reconciler,
+		MakeQueue: func() workqueue.RateLimitingInterface {
+			return workqueue.NewNamedRateLimitingQueue(options.RateLimiter, name)
+		},
 		MaxConcurrentReconciles: options.MaxConcurrentReconciles,
+		SetFields:               mgr.SetFields,
 		Name:                    name,
-	}
-
-	// Add the controller as a Manager components
-	return c, mgr.Add(c)
+		Log:                     options.Log.WithName("controller").WithName(name),
+	}, nil
 }
 ```
 其中 options.Reconciler 就是我们定义的实现了 Reconcile 函数的结构的实例。这一结构的 Reconcile 函数的实现也就是前文中提到的 Operator 实现所需的第二处需要修改的地方。mgr.SetFields(options.Reconciler) 利用依赖注入的方式，将 Manager 的 Client 和 Scheme 注入到 options.Reconciler 中，然后将其赋值给 Controller 中指向 reconcile.Reconciler 接口的字段 Do 中。可以看到除了这一字段，Controller 还有 Queue，Recorder， Client 等其他的字段。因此 kubebuilder 是对 Controller 进行了更高层次的抽象，其有关业务逻辑的实现都通过 reconcile.Reconciler 这一接口进行，而 Queue 等底层的对象，则是由 kubebuilder 来替开发者维护。

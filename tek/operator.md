@@ -45,10 +45,10 @@ get crd
 deploy deployment
 
     make deploy
-    or
-    ./bin/kustomize build config/default >kustomze1.yaml
-    sudo kubectl delete -f kustomze1.yaml
-    sudo kubectl apply -f kustomze1.yaml
+    #or
+    #./bin/kustomize build config/default >kustomze1.yaml
+    #sudo kubectl delete -f kustomze1.yaml
+    #sudo kubectl apply -f kustomze1.yaml
 
 create crd object
 
@@ -115,7 +115,14 @@ controllers/apiexamplea_controller.go
 
 update
 
-    make & make install &make deploy
+    make & make install 
+    sudo make docker-build
+    make deploy
+    #    or
+    #./bin/kustomize build config/default >kustomzetmp.yaml
+    #sudo kubectl delete -f kustomzetmp.yaml
+    #sudo kubectl apply -f kustomzetmp.yaml
+
     kubectl apply -f config/samples/groupa_v1beta1_apiexamplea.yaml
 
     kubectl get pod -n kubeopdemo-system
