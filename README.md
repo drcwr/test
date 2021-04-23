@@ -1,4 +1,5 @@
 # test
+
 * test
 ***
 ### CentOS-7-x86_64-DVD-1804.iso
@@ -57,18 +58,6 @@ http://www.cnblogs.com/studyzy/p/7360733.html
 https://blog.csdn.net/so5418418/article/details/78668109
 
 ***
-
-### ubuntu ip config
-
-* static ip
-
-    cat /etc/network/interfaces
-    #interfaces(5) file used by ifup(8) and ifdown(8)
-    auto enp0s3
-    iface enp0s3 inet static
-    address 192.168.1.40
-    netmask 255.255.255.0
-    gateway 192.168.1.1
 
 
 **dns-nameservers 202.38.64.1**

@@ -95,23 +95,23 @@ config/samples/groupa_v1beta1_apiexamplea.yaml
     +  appFunc: run
     
 controllers/apiexamplea_controller.go
-     
-     func (r *ApiExampleAReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
-    -       _ = r.Log.WithValues("apiexamplea", req.NamespacedName)
-     
-            // your logic here
-    +       ctx = context.Background()
-    +       _ = r.Log.WithValues("apiexamplea", req.NamespacedName)
-     
-    +       obja := &groupav1beta1.ApiExampleA{}
-    +       if err := r.Get(ctx, req.NamespacedName, obja); err != nil {
-    +               log.Println(err, "nuable to fetch New Object")
-    +       } else {
-    +               log.Println("fetch New Object:", obja.Spec.AppName, obja.Spec.AppFunc)
-    +       }
-            return ctrl.Result{}, nil
-     }
-
+```
+ func (r *ApiExampleAReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
+-       _ = r.Log.WithValues("apiexamplea", req.NamespacedName)
+ 
+        // your logic here
++       ctx = context.Background()
++       _ = r.Log.WithValues("apiexamplea", req.NamespacedName)
+ 
++       obja := &groupav1beta1.ApiExampleA{}
++       if err := r.Get(ctx, req.NamespacedName, obja); err != nil {
++               log.Println(err, "nuable to fetch New Object")
++       } else {
++               log.Println("fetch New Object:", obja.Spec.AppName, obja.Spec.AppFunc)
++       }
+        return ctrl.Result{}, nil
+ }
+```
 
 update
 
