@@ -44,7 +44,7 @@ func New(name string, mgr manager.Manager, options Options) (Controller, error) 
 其中 options.Reconciler 就是我们定义的实现了 Reconcile 函数的结构的实例。这一结构的 Reconcile 函数的实现也就是前文中提到的 Operator 实现所需的第二处需要修改的地方。mgr.SetFields(options.Reconciler) 利用依赖注入的方式，将 Manager 的 Client 和 Scheme 注入到 options.Reconciler 中，然后将其赋值给 Controller 中指向 reconcile.Reconciler 接口的字段 Do 中。可以看到除了这一字段，Controller 还有 Queue，Recorder， Client 等其他的字段。因此 kubebuilder 是对 Controller 进行了更高层次的抽象，其有关业务逻辑的实现都通过 reconcile.Reconciler 这一接口进行，而 Queue 等底层的对象，则是由 kubebuilder 来替开发者维护。
 
 最后一步 mgr.Add(c) 将 Operator 加入到 Manager 的一个 Operator 数组中。
-
+```
 type controllerManager struct {
     // ...
 
@@ -74,8 +74,9 @@ func (cm *controllerManager) Add(r Runnable) error {
 
 	return nil
 }
+```
 接下来，我们回过头来看下 Controller 是如何实现 Watch Kubernetes API Server 的资源的：
-
+```
 // Watch implements controller.Controller
 func (c *Controller) Watch(src source.Source, evthdler handler.EventHandler, prct ...predicate.Predicate) error {
 	c.mu.Lock()
@@ -97,8 +98,10 @@ func (c *Controller) Watch(src source.Source, evthdler handler.EventHandler, prc
 	log.Info("Starting EventSource", "controller", c.Name, "source", src)
 	return src.Start(evthdler, c.Queue, prct...)
 }
+```
 这里的 SetFields 是 Manager 将其自己的 SetFields 函数注入了进来，所以等同于调用了 Manager 的 SetFields 方法，其定义如下：
 
+```
 func (cm *controllerManager) SetFields(i interface{}) error {
 	if _, err := inject.ConfigInto(cm.config, i); err != nil {
 		return err
@@ -136,10 +139,12 @@ func CacheInto(c cache.Cache, i interface{}) (bool, error) {
 	}
 	return false, nil
 }
+```
 以 inject.CacheInto 为例介绍下实现，其检查被注入的对象有没有实现 Cache 接口，即有没有实现 InjectCache(cache cache.Cache) error方法。如果实现了，则执行注入，否则直接返回。也就是通过这样的方式，Manager 最终把 Cache 注入到了 Source 中，同时如果需要的话，把 Scheme 注入到了 EventHandler 中。这里的 Scheme 在指定 Owner 的 EventHandler 会被用来获取 Owner 的 GroupKind。
 
 接下来，后面 src.Start(evthdler, c.Queue, prct...) 也就是顺理成章的实现了：
 
+```
 // Start is internal and should be called only by the Controller to register an EventHandler with the Informer
 // to enqueue reconcile.Requests.
 func (ks *Kind) Start(handler handler.EventHandler, queue workqueue.RateLimitingInterface,
@@ -167,4 +172,9 @@ func (ks *Kind) Start(handler handler.EventHandler, queue workqueue.RateLimiting
 	i.AddEventHandler(internal.EventHandler{Queue: queue, EventHandler: handler, Predicates: prct})
 	return nil
 }
+```
 其利用被注入到 Source 中的 Cache 获取到针对 Source 的资源类型的 Informer，然后将 EventHandler 作为处理 Informer 的事件的处理器。这就是 kubebuilder 的高层 API 背后做的事情。
+
+
+- 参考
+http://gaocegege.com/Blog/kubernetes/kubebuilder

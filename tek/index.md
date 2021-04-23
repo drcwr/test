@@ -24,18 +24,22 @@
 ## 03 音视频
 - 视频编解码
 - 自动对焦算法
+
 - 视频存储
 - pjsip
-- kmchc
+- [mpchc](https://blog.csdn.net/drcwr/article/details/14601313)
 - ffmpeg
 - webrtc
 - av1
 - c++
+[dll](https://blog.csdn.net/drcwr/article/details/12994719)
+[api hook](https://blog.csdn.net/drcwr/article/details/12971181)
 
 
 ## 04 网络协议
 - tcp
 - udp
+- quic
 - ospf
 - http 1~3
 - [iptables](https://blog.csdn.net/drcwr/article/details/51037278)
@@ -62,6 +66,7 @@
 - openshift
 - [multus-cni](multus.md)
 - golang
+- gin
 
 ## 06 监控
 open-forcon
@@ -80,9 +85,15 @@ open-forcon
 - go-micro
 - mysql
 - redis
+- grpc
 
 ## 09 树莓派
 - 自动避障
 - 人脸识别
 - 步进电机
+
+## 10 边缘计算
+- kubeedge
+pr [fix message handleserver close channel panic #1557](https://github.com/kubeedge/kubeedge/pull/1557)
+
 

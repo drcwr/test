@@ -1,4 +1,7 @@
 ## kata
+
+![kata](files/kata.jpeg)
+
 - runtimeClassName
 
 ## operator
