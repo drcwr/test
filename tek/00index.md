@@ -78,6 +78,7 @@ open-falcon
 - 共识协议
 - 加密算法
 - 以太坊
+- [febric](febric.md)
 - bts
 - php
 - java
