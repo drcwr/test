@@ -1,5 +1,7 @@
+- [arch](files/01-k8s-operator.odg)
+- [demo](https://github.com/drcwr/kubeopdemo)
+
 ## 创建crd
-demo dir
 
     /opt/gopath/src/github.com/drcwr/kubeopdemo
 
@@ -24,7 +26,7 @@ create api
 
     kubebuilder create api --group groupa --version v1beta1 --kind ApiExampleA
 
-modyfe Dockerfile
+modify Dockerfile
 
     RUN GOPROXY=https://gocenter.io  go mod download
 
