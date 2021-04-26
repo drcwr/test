@@ -62,6 +62,7 @@
 - [kubeneters](k8s.md)
 - websocket
 - [operator](operator.md)
+- [scheduler](k8s.md)
 - etcd
 - raft
 - 一致性hash
