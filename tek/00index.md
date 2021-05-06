@@ -94,6 +94,7 @@ open-falcon
 - go-micro
 - mysql
 - redis
+- memcache
 - grpc
 
 ## 09 树莓派
