@@ -60,8 +60,27 @@ p 调度的   process 代表处理器 P的个数就是GOMAXPROCS（最大256）�
 
 
 ## gc
-## 性能问题排查和优化
+- 三色标记
 
+## 性能问题排查和优化
+### 内存慢慢的OOM
+- memory inuse_spaced 的pprof和list。全局对象或长生命周期对象
+### 内存突增的OOM
+- stack trace,排查
+### 性能问题
+- 火焰图，查看热点。gc频繁，编解码低效。
+
+### 问题排错点
+- 负载，内存，依赖服务
+- panic
+- cpu的pprof
+- 日志，通过channel，发送给单独的goroutine异步打印
+- GODEBUG-gctrace=1,查看GC的stw.gctrace输出到console，这是内存；或者 stdout重定向到文件。保持开启gc需要的锁，导致下一次gc无法获取锁，进入gc检查，导致p阻塞，实际上就造成两stw。
+
+## 原子库
+- store
+
+![atomic](files/atomic.svg)
 
 - 自举
 https://blog.csdn.net/byxiaoyuonly/article/details/112430074

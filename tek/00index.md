@@ -9,9 +9,12 @@
 - html
 - js
 - java
+- jvm
 
 
 ## 02 嵌入式
+- [linux](linux.md)
+
 - 交叉编译
 - arm架构 x86架构
 - 串口
@@ -53,18 +56,21 @@
 - ovs
 - openflow
 - sdn
+- nginx
 
 
 ## 05 云计算
 ### 051 iaas
 - openstack
+- vpc
 - python
 
 ### 052 paas
 - [kubeneters](k8s.md)
-- websocket
 - [operator](operator.md)
 - [scheduler](k8s.md)
+- velero
+- websocket
 - etcd
 - raft
 - 一致性hash
@@ -75,7 +81,7 @@
 - gin
 
 ## 06 监控
-open-falcon
+- open-falcon
 
 ## 07 区块链
 - 共识协议
@@ -112,3 +118,9 @@ pr [fix message handleserver close channel panic #1557](https://github.com/kubee
 - c10k
 - c10m
 - ebpf
+
+
+## 加密相关
+- bcrypt vs md5
+- hmac-sha256 hash-based message authentication code 哈希消息认证码,支持多种哈希加密算法，sha256其中之一
+- sha256
