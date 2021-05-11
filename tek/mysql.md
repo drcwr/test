@@ -2,5 +2,27 @@
 - b+ tree
 
 ## 优化
+
+- MYSQL优化主要分为以下四大方面：
+```
+设计：存储引擎，字段类型，范式与逆范式
+功能：索引，缓存，分区分表。
+架构：主从复制，读写分离，负载均衡。
+合理SQL：测试，经验
+```
+
 - explain
 
+- 树高
+```
+假设平均指针大小是4个字节，那么索引树的每个节点可以存储16k/((8+4)*8)≈171。那么：一个拥有1600w数据，且主键是BIGINT类型的表的主键索引树的高度就是(log10^7)/log171 ≈ 24/7.4 ≈ 3.2。
+假设平均指针大小是8个字节，可以存储16k/((8+8)*8)≈128。树的高度就是(log10^7)/log128 ≈ 24/7 ≈ 3.4。
+一个千万量级，且存储引擎是MyISAM或者InnoDB的表，其索引树的高度在3~5之间
+```
+- 参考
+```
+https://blog.csdn.net/kongliand/article/details/110878972
+https://www.cnblogs.com/sharpest/p/10390035.html
+https://www.cnblogs.com/luyucheng/p/6323477.html
+https://zhuanlan.zhihu.com/p/59818056
+```

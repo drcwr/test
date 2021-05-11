@@ -5,10 +5,14 @@
 ## CHANNEL
 
 ## GC
+- 三色标记
 
 ## context
 
 ## atomic
+- store
+
+![atomic](files/atomic.svg)
 
 ## demo
 [code](https://github.com/drcwr/godemos)
@@ -43,6 +47,13 @@ p 调度的   process 代表处理器 P的个数就是GOMAXPROCS（最大256）�
 
 
 ## 并发原语
+- singleflight
+![singleflight](files/22-go-singleflight.svg)
+```
+https://blog.csdn.net/caoPengFlying/article/details/115874559
+https://segmentfault.com/a/1190000039712358?utm_source=tag-newest
+https://pkg.go.dev/golang.org/x/sync/singleflight
+```
 
 ## 内存空间结构
 - tcmalloc span,go page=8kB,
@@ -59,8 +70,7 @@ p 调度的   process 代表处理器 P的个数就是GOMAXPROCS（最大256）�
 
 
 
-## gc
-- 三色标记
+
 
 ## 性能问题排查和优化
 ### 内存慢慢的OOM
@@ -77,10 +87,7 @@ p 调度的   process 代表处理器 P的个数就是GOMAXPROCS（最大256）�
 - 日志，通过channel，发送给单独的goroutine异步打印
 - GODEBUG-gctrace=1,查看GC的stw.gctrace输出到console，这是内存；或者 stdout重定向到文件。保持开启gc需要的锁，导致下一次gc无法获取锁，进入gc检查，导致p阻塞，实际上就造成两stw。
 
-## 原子库
-- store
 
-![atomic](files/atomic.svg)
 
 - 自举
 https://blog.csdn.net/byxiaoyuonly/article/details/112430074
