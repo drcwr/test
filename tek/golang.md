@@ -1,13 +1,43 @@
 ## GPM
-- goroutine
+### goroutine
+- goroutine 泄漏及措施
+
 - scheduler
 
 ## CHANNEL
 
 ## GC
-- 三色标记
+- 三色标记 concurrent mark-sweep，非分代，非紧缩，混合写屏障
+```
+/usr/lib/go1.16.3/src/runtime/mgc.go
+
+黑白灰
+root -> 灰
+        灰 -> 灰
+        黑 -> 灰
+        ...
+        灰=null
+        回收白
+```
+- 平衡：程序吞吐量，gc吞吐量，stw时间，stw频率，压缩，分配性能，并发，伸缩，调优复杂度
+- 并发收集器：垃圾回收的同时应用程序也在执行
+- 并行收集器：垃圾回收采取多线程利用多个cpu一起进行gc
+- 压缩：compact，将存活对象移动到一起，获得连续的空闲空间
+- 1.8 hybrid write barrier,stw 到sub ms，混合式
+- 写屏障，在写入指针前执行的一小段代码，用以防止并发标记时指针丢失，go在编译时加入。
+```
+a=nil,b=c
+// scan a
+a=c // c 加入buf,防止c丢失
+// scan b
+b = nil
+// flush c from buf to 灰 // 没有buf，c丢失
+```
 
 ## context
+
+- context.WithCancel
+- ![cancel](files/22-go-ctx-cancel.svg)
 
 ## atomic
 - store
@@ -39,11 +69,7 @@ p 调度的   process 代表处理器 P的个数就是GOMAXPROCS（最大256）�
 - goready()
 
 
-参考
-- https://blog.csdn.net/jinyidong/article/details/88235290
-- https://www.cnblogs.com/lvpengbo/p/13973906.html
-- https://blog.csdn.net/liangzhiyang/article/details/52669851
-- https://zhuanlan.zhihu.com/p/95056679
+
 
 
 ## 并发原语
@@ -89,6 +115,25 @@ https://pkg.go.dev/golang.org/x/sync/singleflight
 
 
 
-- 自举
+## 自举
 https://blog.csdn.net/byxiaoyuonly/article/details/112430074
 
+## dlv debug
+vscode
+install dlv
+go mod init
+debug f5
+gopath 路径打开代码
+
+https://www.yht7.com/news/31963
+https://code.visualstudio.com/docs/editor/variables-reference
+
+参考
+- https://blog.csdn.net/jinyidong/article/details/88235290
+- https://www.cnblogs.com/lvpengbo/p/13973906.html
+- https://blog.csdn.net/liangzhiyang/article/details/52669851
+- https://zhuanlan.zhihu.com/p/95056679
+- https://draveness.me/golang/
+- https://talks.golang.org/
+- http://www.topgoer.com/%E5%BC%80%E6%BA%90/go%E5%AD%A6%E4%B9%A0%E7%BA%BF%E8%B7%AF%E5%9B%BE.html
+![luxian](files/goluxian.png)

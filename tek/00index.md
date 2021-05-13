@@ -97,11 +97,12 @@
 
 ## 08 后端
 - gin
-- go-micro
+- 微服务 [go-micro](go-micro.md)
 - mysql
 - redis
 - memcache
-- grpc
+- grpc thrift
+- service mesh
 
 ## 09 树莓派
 - [自动避障](pi.md#自动避障)
@@ -118,6 +119,7 @@ pr [fix message handleserver close channel panic #1557](https://github.com/kubee
 - c10k
 - c10m
 - ebpf
+- 分布式高并发高可用高负载
 
 
 ## 加密相关
