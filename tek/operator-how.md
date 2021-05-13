@@ -2,7 +2,10 @@
 
 apis.AddToScheme 将 CRD 的结构与 Kubernetes GroupVersionKinds 的映射添加到 Manager 的 Scheme 中。
 
-接下来，就是通过 controller.AddToManager 创建出定义的 Operator，并且添加到 Manager 中。这也就是前文提到的 add 函数做的事情。利用 controller.New 创建出 Operator，然后 Watch 对应的资源，最后返回。下面是 controller.New 的实现：
+接下来，就是通过 controller.AddToManager 创建出定义的 Operator，并且添加到 Manager 中。这也就是前文提到的 add 函数做的事情。利用 controller.New 创建出 Operator，然后 Watch 对应的资源，最后返回。
+![operator](files/01-k8s-operator.svg)
+
+下面是 controller.New 的实现：
 ```
 /opt/gopath/pkg/mod/sigs.k8s.io/controller-runtime@v0.7.2/pkg/controller/controller.go
 // New returns a new Controller registered with the Manager.  The Manager will ensure that shared Caches have
