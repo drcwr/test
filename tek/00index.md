@@ -29,7 +29,7 @@
 - [自动对焦算法]()
 
 - 视频存储
-- pjsip
+- [pjsip](https://blog.csdn.net/drcwr/article/details/44343619)
 - [mpchc](https://blog.csdn.net/drcwr/article/details/14601313)
 - ffmpeg
 - webrtc
@@ -79,6 +79,11 @@
 - [multus-cni](multus.md)
 - [golang](golang.md)
 - gin
+- docker
+- [istio](istio.md)
+```
+On current Docker, if the "image" column says <missing>, you can't go back to that intermediate layer as an image. 
+```
 
 ## 06 监控
 - open-falcon
@@ -126,3 +131,7 @@ pr [fix message handleserver close channel panic #1557](https://github.com/kubee
 - bcrypt vs md5
 - hmac-sha256 hash-based message authentication code 哈希消息认证码,支持多种哈希加密算法，sha256其中之一
 - sha256
+
+## ai
+- https://developer.nvidia.com/zh-cn/blog/nvidia-gpu-operator-simplifying-gpu-management-in-kubernetes/
+- https://developer.nvidia.com/blog/nvidia-gpu-operator-simplifying-gpu-management-in-kubernetes/

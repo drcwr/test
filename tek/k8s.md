@@ -12,6 +12,9 @@
 ## scheduler
 [source](files/01-k8s-scheduler.odg)
 
+## informer
+[informer](informer.md)
+
 ## flannel
 ![flannel](files/flannel.webp)
 

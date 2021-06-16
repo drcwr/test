@@ -1,6 +1,24 @@
 ## GPM
 ### goroutine
 - goroutine 泄漏及措施
+```
+死循环、channel 阻塞、锁等待，只要是会造成阻塞的写法都可能产生泄露
+https://zhuanlan.zhihu.com/p/74090074
+```
+![cancel](files/22-go-ctx-cancel.svg)
+```
+wg.Add(1)
+go func(){
+    ...
+    wg.Done()
+}()
+
+wg.Wait()
+```
+```
+mutex.Lock()
+defer mutext.Unlock()
+```
 
 - scheduler
 
@@ -37,7 +55,8 @@ b = nil
 ## context
 
 - context.WithCancel
-- ![cancel](files/22-go-ctx-cancel.svg)
+
+![cancel](files/22-go-ctx-cancel.svg)
 
 ## atomic
 - store
@@ -59,7 +78,22 @@ p 调度的   process 代表处理器 P的个数就是GOMAXPROCS（最大256）�
 ![scheduler](files/22-go-goroutine.svg)
 ```
 调度流程
+
+/usr/lib/go1.16.3/src/runtime/proc.go
+// One round of scheduler: find a runnable goroutine and execute it.
+// Never returns.
+func schedule() {}
+
+每次go调用的时候，都会：
+
+1.     创建一个G对象，加入到本地队列或者全局队列 func newproc(siz int32, fn *funcval) {}
+2.     如果还有空闲的P，则创建一个M
+runtime.main 			newm(sysmon, nil, -1)
+3.     M会启动一个底层线程，循环执行能找到的G任务
+
 在M与P绑定后，M会不断从P的Local队列(runq)中取出G(无锁操作)，切换到G的堆栈并执行，当P的Local队列中没有G时，再从Global队列中返回一个G(有锁操作，因此实际还会从Global队列批量转移一批G到P Local队列)，当Global队列中也没有待运行的G时，则尝试从其它的P窃取(steal)部分G来执行
+/usr/lib/go1.16.3/src/runtime/proc.go
+func findrunnable() (gp *g, inheritTime bool) {}
 
 ```
 - sysmon
@@ -69,12 +103,26 @@ p 调度的   process 代表处理器 P的个数就是GOMAXPROCS（最大256）�
 - goready()
 
 
+```
+/usr/lib/go1.16.3/src/runtime/asm_amd64.s
+runtime·rt0_go
 
+	CALL	runtime·args(SB)
+	CALL	runtime·osinit(SB)
+	CALL	runtime·schedinit(SB)
+
+/usr/lib/go1.16.3/src/runtime/proc.go
+// The new G calls runtime·main.
+func schedinit() {}
+
+```
 
 
 ## 并发原语
 - singleflight
+
 ![singleflight](files/22-go-singleflight.svg)
+
 ```
 https://blog.csdn.net/caoPengFlying/article/details/115874559
 https://segmentfault.com/a/1190000039712358?utm_source=tag-newest
@@ -116,7 +164,11 @@ https://pkg.go.dev/golang.org/x/sync/singleflight
 
 
 ## 自举
-https://blog.csdn.net/byxiaoyuonly/article/details/112430074
+```
+c -> dist -> go_bootstrap -> go
+
+```
+- https://blog.csdn.net/byxiaoyuonly/article/details/112430074
 
 ## dlv debug
 vscode
