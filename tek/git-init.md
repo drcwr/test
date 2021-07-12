@@ -13,3 +13,8 @@ git clone的时候加入-c core.symlinks=true这个参数（并且重点！需�
 ```
 
 - https://zhuanlan.zhihu.com/p/52056165
+
+
+## 修改remote 地址
+git remote set-url origin git@github.com:drcwr/test.git
+
