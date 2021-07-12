@@ -1,0 +1,17 @@
+
+## 缩写
+
+TCP
+MTU
+MSS
+CWND
+SSTHRESH
+RTT
+ACK
+SYN
+RST
+FIN
+
+
+
+
