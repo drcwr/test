@@ -40,7 +40,7 @@
 
 
 ## 04 网络协议
-- tcp
+- [tcp](tcp.md)
 - udp
 - quic
 - ospf
@@ -68,6 +68,7 @@
 ### 052 paas
 - [kubeneters](k8s.md)
 - [operator](operator.md)
+- [gpu-operator](gpu-operator.md)
 - [scheduler](k8s.md)
 - velero
 - websocket

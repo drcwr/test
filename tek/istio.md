@@ -30,7 +30,7 @@
 - citadel(auth) 安全
 
 ### 数据面 
-- envoy 
+- [envoy](envoy.md)
 ```
 "sidecar",在Kubernets中自动注入方式到业务pod中
 ```
@@ -46,3 +46,6 @@
 - https://blog.csdn.net/luanpeng825485697/article/details/84560659
 - [Istio：Mixer功能架构与实践](https://blog.csdn.net/fly910905/article/details/104040395)
 - Istio是啥？一文带你彻底了解！ http://www.uml.org.cn/wfw/201909063.asp
+
+
+
