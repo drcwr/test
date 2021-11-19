@@ -121,6 +121,17 @@ On current Docker, if the "image" column says <missing>, you can't go back to th
 pr [fix message handleserver close channel panic #1557](https://github.com/kubeedge/kubeedge/pull/1557)
 
 
+## 11 广告出海变现
+
+- head bidding
+- adx
+- [openrtb](files/bidding/OpenRTB-API-Specification-Version-2-5-FINAL.pdf)
+- ![docs](files/bidding/bidding-docs.png)
+
+
+## jq json
+- [jq](files/jq)
+
 ## 高性能
 - c10k
 - c10m

@@ -1,0 +1,214 @@
+#
+
+cd /services/bidder_server/
+grep companyId=365  app.info*.log > /dev/shm/cid365
+awk '{print $16}' cid365 > price
+awk -F= '{print $2}' price > pn
+
+
+#!/usr/bin/env python
+#encoding:utf8
+#https://github.com/linuxhub/log_ip_count/blob/master/log_ip_count.py
+
+
+import re,sys
+
+data_file = 'pn'
+
+
+#读文件数据
+
+def fpcount(data_file):
+    with open(data_file, 'r') as f:
+        #print f.readlines() #每次读一行
+        count = {}
+        for line in f.readlines():
+            content = line.strip() # 把末尾的'\n'删掉
+            fc = float(content)
+            #log = content.split('- -')
+            #ip = log[0]
+            #count[ip] = count.get(ip,0)+1  #加1
+            if fc > 12.0 :
+                #print (fc)
+                count["d12"] = count.get("d12",0)+1
+            elif fc > 8.0 :
+                #print (fc)
+                count["d8"] = count.get("d8",0)+1
+            elif fc > 6.0 :
+                #print (fc)
+                count["d6"] = count.get("d6",0)+1
+            elif fc > 5.0 :
+                #print (fc)
+                count["d5"] = count.get("d5",0)+1
+            elif fc > 4.0 :
+                #print (fc)
+                count["d4"] = count.get("d4",0)+1
+            elif fc > 3.0 :
+                #print (fc)
+                count["d3"] = count.get("d3",0)+1
+            elif fc > 2.0 :
+                #print (fc)
+                count["d2"] = count.get("d2",0)+1
+            elif fc > 1.5 :
+                #print (fc)
+                count["d1.5"] = count.get("d1.5",0)+1
+            elif fc > 1.2 :
+                #print (fc)
+                count["d1.2"] = count.get("d1.2",0)+1
+            elif fc > 1.0 :
+                #print (fc)
+                count["d1"] = count.get("d1",0)+1
+            elif fc > 0.5 :
+                #print (fc)
+                count["d0.5"] = count.get("d0.5",0)+1
+            else :
+                #print (fc)
+                count["null"] = count.get("null",0)+1
+
+
+    return count
+
+
+
+pcount = fpcount(data_file)
+
+total = 0
+for p,count in pcount.items():
+    total += count
+    print ('%s\t%s'%(p,count))
+print ('total %s'%(total))
+
+i=$(head -n1 r)
+i=$(head -n1 h1)
+i=$(head -n1 fbh1)
+
+echo ${i#*bidlog*bidLog.}|jq '.AdResponse.adsourceplacements|.[]'|grep 19739 -A1|tail -n1
+echo ${i#*bidlog*bidLog.}|jq '.AdNetworks.vungle'|grep -w bidfloor
+echo ${i#*bidLog.}|jq '.AdResponse.adsourceplacements|.[]|select(.id == 19739).nbr'
+echo ${i#*bidLog.}|jq '.AdResponse.adsourceplacements|.[]|select(.id == 19739).nbr'
+echo ${i#*bidLog.}|jq '.AdResponse.adsourceplacements[]|select(.id == 19739).nbr'
+echo ${i#*bidLog.}|jq '.AdResponse.adsourceplacements[]'
+
+echo ${i#*bidLog.}|jq '.AdResponse.adsourceplacements|.[]|select(.id == 19739).adm|fromjson'
+
+while read -r i
+do
+    echo ${i#*bidLog.}|jq '.AdResponse.adsourceplacements|.[]|select(.id == 19739).nbr'
+done < r
+
+    echo ${i#*bidLog.}|jq '.AdNetworks.audience-network.BidRequest|select(.ext.platformid == "1120294831716115")|.imp.tagid'
+
+filename=$1
+echo $filename
+while read -r i
+do
+    #echo ${i#*bidlog*bidLog.}|jq '.AdResponse.adsourceplacements[]|select(.id == 29512)|{"nbr":.nbr,"error_code":.ext.error_code}'
+    echo ${i#*bidLog.}|jq '.AdNetworks."audience-network".BidRequest|select(.ext.platformid == "1120294831716115")|.imp|.[].tagid'
+done < $filename
+
+
+
+
+#!/bin/bash
+
+for i in `ls /services/data/notice_logs/app.notice.20211021*`
+do
+    echo $i---
+    #grep $i /services/data/notice_logs/app.notice.20211021* | wc -l
+    sh jqq.sh $i > $i-tagid
+done
+
+
+sudo su
+mkdir /services/data
+cd /services/bidder_server/logs
+mv app.notice.2021102109*.log app.notice.2021102110*.log app.notice.2021102111*.log app.notice.2021102112*.log app.notice.2021102113*.log /services/data/
+cd /services/data
+cat > run.sh <<eof
+#!/bin/bash
+
+for i in \`ls\`
+do
+    echo \$i---
+    sh jqq.sh \$i > \$i-tagid
+done
+eof
+
+cat > jqq.sh <<eof
+filename=\$1
+echo \$filename
+while read -r i
+do
+    echo \${i#*bidLog.}|jq '.AdNetworks."audience-network".BidRequest|select(.ext.platformid == "1120294831716115")|.imp|.[].tagid'
+
+done < \$filename
+
+eof
+yum install jq screen -y
+screen sh run.sh
+
+
+
+
+
+
+
+
+echo ${i#*bidLog.}|jq '.AdNetworks."audience-network".BidRequest|.ext.platformid,.imp.tagid'
+
+
+filename=$1
+echo $filename
+while read -r i
+do
+    #echo ${i#*bidlog*bidLog.}|jq '.AdNetworks.vungle.BidResponse.SeatBid'|grep -w Price
+    #echo ${i#*bidlog*bidLog.}|jq '.AdNetworks.Pangle' >> adnetpangle
+    echo ${i#*bidlog*bidLog.}|jq '.AdResponse.adsourceplacements[]|select(.id == 29512).nbr,.ext.error_code'
+done < $filename
+
+"bidfloor|Price|placementid"
+
+
+shell jq 语法 json
+
+linux shell json解析命令 jq 简介
+https://blog.csdn.net/whatday/article/details/105781873
+
+
+shell里的json超级工具 jq 高级用法介绍
+https://blog.csdn.net/happyfreeangel/article/details/89408935
+
+Shell：无比强大的shell之json解析工具jq , Linux命令行解析json, jq解析 json 实例
+https://justcode.ikeepstudying.com/2018/02/shell%EF%BC%9A%E6%97%A0%E6%AF%94%E5%BC%BA%E5%A4%A7%E7%9A%84shell%E4%B9%8Bjson%E8%A7%A3%E6%9E%90%E5%B7%A5%E5%85%B7jq-linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%A7%A3%E6%9E%90json-jq%E8%A7%A3%E6%9E%90-json/
+
+
+JSON格式化输出和解析工具 - jq
+https://www.cnblogs.com/kevingrace/p/7565371.html
+
+
+https://github.com/ludovicm67/sh-speedlogs/blob/master/run.sh
+
+
+https://github.com/aqib1/jq-shell-sample/blob/master/jq_sample.sh
+
+for realization in $(cat ${project_path}/${PROJECT}.json | jq '.realizations[] | select(.type == "CUBE").realization'); do
+ realization=$(echo ${realization} | tr --delete '"')
+ echo $realization
+ done
+
+
+# https://stackoverflow.com/questions/51869431/using-jq-select-elements-with-keys-containing-some-string-key-preserved-in-resu
+[root@HK-SSP-10-1-0-72 data]# cat jqq-select-contains.sh
+filename=$1
+echo $filename
+while read -r i
+do
+    #echo $i
+    #echo ${i#*bidLog.}|jq '.AdNetworks."audience-network".BidRequest|select(.ext.platformid == "1120294831716115")|.imp|.[].tagid'
+    echo ${i#*bidLog.}|jq '.AdNetworks."audience-network".BidRequest|select(.ext.platformid|contains("94831716115"))|.imp|.[].tagid'
+
+done < $filename
+
+
+echo ${i#*bidLog.}|jq 'select(.AdResponse.adsourceplacements|.[]|.id == 19739)|{p:.AdNetworks.vungle.BidResponse.SeatBid[].Bid[].Price,n:.AdResponse.adsourceplacements|.[]|select(.id == 19739).nbr,ext:.AdResponse.adsourceplacements|.[]|select(.id == 19739).ext,wf:.AdResponse.biddingwaterfall|.[]|select(.id == 19739).value}'
+
