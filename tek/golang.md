@@ -180,6 +180,11 @@ gopath 路径打开代码
 https://www.yht7.com/news/31963
 https://code.visualstudio.com/docs/editor/variables-reference
 
+
+
+## go lib 源码分析
+
+
 参考
 - https://blog.csdn.net/jinyidong/article/details/88235290
 - https://www.cnblogs.com/lvpengbo/p/13973906.html
