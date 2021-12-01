@@ -98,7 +98,7 @@ func findrunnable() (gp *g, inheritTime bool) {}
 ```
 - sysmon
 
-#### gotoutine 状态
+#### goroutine 状态
 - gopark()
 - goready()
 
@@ -182,7 +182,8 @@ https://code.visualstudio.com/docs/editor/variables-reference
 
 
 
-## go lib 源码分析
+## go lib 标准库源码分析
+
 
 
 参考
