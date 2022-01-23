@@ -8,7 +8,7 @@
 - [golang](golang.md)
 - html
 - js
-- java
+- [java](java.md)
 - jvm
 
 
